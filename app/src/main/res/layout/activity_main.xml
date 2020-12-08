@@ -7,38 +7,13 @@
     android:padding="10dp"
     tools:context="com.esiea.project.presentation.main.MainActivity">
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggle_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/dark_theme_switch"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
-        <Button
-            android:id="@+id/theme_button_dark"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="D"
-            style="?attr/materialButtonOutlinedStyle"
-            />
-        <Button
-            android:id="@+id/theme_button_light"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="L"
-            style="?attr/materialButtonOutlinedStyle"
-            />
-        <Button
-            android:id="@+id/theme_button_system"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="S"
-            style="?attr/materialButtonOutlinedStyle"
-            />
-
-
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Dark theme"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_input_layout"
