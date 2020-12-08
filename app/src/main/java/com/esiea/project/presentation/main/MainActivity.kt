@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
                 is LoginSuccess -> TODO()
                 LoginError -> {
                     MaterialAlertDialogBuilder(this)
-                        .setTitle("Error")
-                        .setMessage("Compte inconnu")
+                        .setTitle("Erreur")
+                        .setMessage("Compte inconnu ou mot de passe incorrect")
                         .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
                         .show()
                 }
