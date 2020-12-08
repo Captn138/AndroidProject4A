@@ -2,6 +2,8 @@ package com.esiea.project.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.lifecycle.Observer
 import com.esiea.project.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -28,8 +30,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
         login_button.setOnClickListener {
             mainViewModel.onClickedLogin(login_edit.text.toString().trim(), password_edit.text.toString())
+        }
+
+        toggle_button.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+            theme_button_dark.setOnClickListener {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            }
+            theme_button_light.setOnClickListener {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+            }
+            theme_button_system.setOnClickListener {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+            }
         }
     }
 }
