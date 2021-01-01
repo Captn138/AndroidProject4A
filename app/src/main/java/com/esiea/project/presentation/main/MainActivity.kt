@@ -33,8 +33,34 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        mainViewModel.registerLiveData.observe(this, Observer {
+            when (it) {
+                is RegisterSuccess -> {
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("Succès")
+                        .setMessage("Votre compte a été créé. Vous pouvez désormais vous connecter.")
+                        .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+                        .show()
+                }
+                RegisterError -> {
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("Erreur")
+                        .setMessage("Email ou mot de passe vide")
+                        .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+                        .show()
+                }
+            }
+        })
+
         login_button.setOnClickListener {
             mainViewModel.onClickedLogin(
+                login_edit.text.toString().trim(),
+                password_edit.text.toString()
+            )
+        }
+
+        create_account_button.setOnClickListener {
+            mainViewModel.onClickedRegister(
                 login_edit.text.toString().trim(),
                 password_edit.text.toString()
             )

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.esiea.project">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="com.esiea.project.injection.EsieaApplication"
         android:allowBackup="true"
@@ -11,15 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
         <activity
-            android:name="com.esiea.project.presentation.main.MainActivity"
+            android:name=".presentation.splash.SplashActivity"
             android:windowSoftInputMode="adjustResize"
+            android:theme="@style/SplashTheme"
+            android:parentActivityName=".presentation.main.MainActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:parentActivityName=".presentation.main.MainActivity"/>
+
     </application>
 
 </manifest>
