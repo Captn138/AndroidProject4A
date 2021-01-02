@@ -1,6 +1,5 @@
 package com.esiea.project.presentation.list
 
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -13,7 +12,7 @@ import com.esiea.project.R
 import com.esiea.project.data.local.Constants
 import com.esiea.project.data.local.models.Doctor
 import com.esiea.project.injection.Singletons
-import com.google.gson.GsonBuilder
+import com.esiea.project.presentation.list.MyListAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -60,11 +59,19 @@ class MyListActivity : AppCompatActivity() {
         recyclerView!!.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this)
         recyclerView!!.layoutManager = layoutManager
-        mAdapter = MyListAdapter(doctorList as ArrayList<Doctor>)
+        mAdapter = MyListAdapter(doctorList as ArrayList<Doctor>, object : OnItemClickListener {
+            override fun onItemClick(doctor: Doctor) {
+                controller!!.onItemClick(doctor)
+            }
+        })
         recyclerView!!.adapter = mAdapter
     }
 
     fun showError() {
         Toast.makeText(applicationContext, Constants.error, Toast.LENGTH_SHORT).show()
+    }
+
+    fun navigateToDetails(doctor: Doctor) {
+        TODO("navigation")
     }
 }

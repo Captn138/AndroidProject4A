@@ -1,6 +1,7 @@
 package com.esiea.project.presentation.list
 
 import android.content.SharedPreferences
+import android.widget.Toast
 import com.esiea.project.data.local.Constants
 import com.esiea.project.data.local.models.Doctor
 import com.esiea.project.injection.Singletons
@@ -57,8 +58,12 @@ class ListController(view: MyListActivity, gson: Gson, sharedPreferences: Shared
     private fun saveList(doctorList: List<Doctor>) {
         val jsonDoctorString: String = gson.toJson(doctorList)
         sharedPreferences
-            ?.edit()
-            ?.putString(Constants.key_doctor_list, jsonDoctorString)
-            ?.apply()
+            .edit()
+            .putString(Constants.key_doctor_list, jsonDoctorString)
+            .apply()
+    }
+
+    fun onItemClick(doctor: Doctor) {
+        view.navigateToDetails(doctor)
     }
 }

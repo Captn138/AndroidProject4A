@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esiea.project.R
 import com.esiea.project.data.local.models.Doctor
 
-class MyListAdapter(myDataSet: ArrayList<Doctor>) : RecyclerView.Adapter<MyListAdapter.MyViewHolder>() {
+class MyListAdapter(myDataSet: ArrayList<Doctor>, private var listener: OnItemClickListener) : RecyclerView.Adapter<MyListAdapter.MyViewHolder>() {
 
     private var values: ArrayList<Doctor> = myDataSet
 
@@ -29,19 +29,13 @@ class MyListAdapter(myDataSet: ArrayList<Doctor>) : RecyclerView.Adapter<MyListA
         val doctor: Doctor = values[position]
         holder.txtHeader.text = doctor.incarnation
         holder.txtFooter.text = "ID: " + doctor.id
-        holder.txtHeader.setOnClickListener {
-            onClick();
-        }
-        holder.txtFooter.setOnClickListener {
-            onClick()
-        }
-        holder.img.setOnClickListener {
-            onClick()
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(doctor)
         }
     }
 
-    private fun onClick() {
-        TODO("Not yet implemented / On Click method: get to the detailed view")
+    interface OnItemClickListener {
+        fun onItemClick(doctor: Doctor)
     }
 
     fun add(position: Int, item: Doctor) {
@@ -59,7 +53,6 @@ class MyListAdapter(myDataSet: ArrayList<Doctor>) : RecyclerView.Adapter<MyListA
         private var view: View = v
         var txtHeader: TextView = v.findViewById(R.id.firstLine)
         var txtFooter: TextView = v.findViewById(R.id.secondLine)
-        var img: ImageView = v.findViewById(R.id.icon)
 
     }
 }
