@@ -3,16 +3,23 @@ package com.esiea.project.presentation.list
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.esiea.project.R
-import com.esiea.project.data.local.models.Constants
-import kotlinx.android.synthetic.main.activity_list.*
-import kotlinx.android.synthetic.main.activity_main.dark_theme_switch
-import kotlin.reflect.jvm.internal.impl.load.java.Constant
+import com.esiea.project.data.local.Constants
+import com.esiea.project.data.remote.Doctor
+import com.esiea.project.domain.api.DoctorApi
+import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 class MyListActivity : AppCompatActivity() {
 
@@ -28,16 +35,9 @@ class MyListActivity : AppCompatActivity() {
         recyclerView!!.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(this)
         recyclerView!!.layoutManager = layoutManager
-        val input1: ArrayList<String> = ArrayList()
-        val input2: ArrayList<String> = ArrayList()
 
-        for (i in 0..99) {
-            input1.add("Test$i")
-            input2.add(Constants.test)
-        }
-
-        mAdapter = MyListAdapter(input2)
-        recyclerView!!.adapter = mAdapter
+        showList()
+        makeApiCall()
 
         when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_YES ->
@@ -58,5 +58,49 @@ class MyListActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun makeApiCall() {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+        val retrofit = Retrofit
+            .Builder()
+            .baseUrl(Constants.api_url)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        val doctorApi = retrofit.create(DoctorApi::class.java)
+        val call: Call<List<Doctor>> = doctorApi.doctorResponse
+
+        call.enqueue(object : Callback<List<Doctor>> {
+            override fun onFailure(call: Call<List<Doctor>>?, t: Throwable) {
+                showError()
+            }
+
+            override fun onResponse(call: Call<List<Doctor>>?, response: Response<List<Doctor>>?) {
+                if (response!!.isSuccessful && response.body() != null) {
+                    val doctorList: List<Doctor> = response.body()!!.filterNotNull()
+                    Toast.makeText(applicationContext, "success", Toast.LENGTH_SHORT).show()
+                } else {
+                    showError()
+                }
+            }
+        })
+    }
+
+    private fun showList() {
+        val input1: ArrayList<String> = ArrayList()
+        val input2: ArrayList<String> = ArrayList()
+        for (i in 0..99) {
+            input1.add("Test$i")
+            input2.add(Constants.test)
+        }
+
+        mAdapter = MyListAdapter(input2)
+        recyclerView!!.adapter = mAdapter
+    }
+
+    private fun showError() {
+        Toast.makeText(applicationContext, Constants.error, Toast.LENGTH_SHORT).show()
     }
 }
