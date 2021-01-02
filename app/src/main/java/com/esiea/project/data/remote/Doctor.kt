@@ -4,5 +4,4 @@ class Doctor {
     var id: Int = 0
     var incarnation: String = ""
     var primaryActorID: Int = 0
-    var links: List<DoctorLinks>? = null
 }

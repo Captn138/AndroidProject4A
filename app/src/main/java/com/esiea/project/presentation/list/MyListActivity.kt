@@ -36,7 +36,6 @@ class MyListActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         recyclerView!!.layoutManager = layoutManager
 
-        showList()
         makeApiCall()
 
         when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -80,7 +79,7 @@ class MyListActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Doctor>>?, response: Response<List<Doctor>>?) {
                 if (response!!.isSuccessful && response.body() != null) {
                     val doctorList: List<Doctor> = response.body()!!.filterNotNull()
-                    Toast.makeText(applicationContext, "success", Toast.LENGTH_SHORT).show()
+                    showList(doctorList)
                 } else {
                     showError()
                 }
@@ -88,15 +87,8 @@ class MyListActivity : AppCompatActivity() {
         })
     }
 
-    private fun showList() {
-        val input1: ArrayList<String> = ArrayList()
-        val input2: ArrayList<String> = ArrayList()
-        for (i in 0..99) {
-            input1.add("Test$i")
-            input2.add(Constants.test)
-        }
-
-        mAdapter = MyListAdapter(input2)
+    private fun showList(doctorList: List<Doctor>) {
+        mAdapter = MyListAdapter(doctorList as ArrayList<Doctor>)
         recyclerView!!.adapter = mAdapter
     }
 

@@ -1,17 +1,18 @@
 package com.esiea.project.presentation.list
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.esiea.project.R
+import com.esiea.project.data.remote.Doctor
 
-class MyListAdapter(myDataSet: ArrayList<String>) : RecyclerView.Adapter<MyListAdapter.MyViewHolder>() {
+class MyListAdapter(myDataSet: ArrayList<Doctor>) : RecyclerView.Adapter<MyListAdapter.MyViewHolder>() {
 
-    private var values: ArrayList<String> = myDataSet
+    private var values: ArrayList<Doctor> = myDataSet
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyListAdapter.MyViewHolder {
         val inflatedView = parent.inflate(R.layout.row_layout, false)
@@ -25,12 +26,25 @@ class MyListAdapter(myDataSet: ArrayList<String>) : RecyclerView.Adapter<MyListA
     override fun getItemCount(): Int = values.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val name: String = values[position]
-        holder.txtHeader.text = name
-        holder.txtHeader.setOnClickListener {  }
+        val doctor: Doctor = values[position]
+        holder.txtHeader.text = doctor.incarnation
+        holder.txtFooter.text = "ID: ${doctor.id}"
+        holder.txtHeader.setOnClickListener {
+            onClick();
+        }
+        holder.txtFooter.setOnClickListener {
+            onClick()
+        }
+        holder.img.setOnClickListener {
+            onClick()
+        }
     }
 
-    fun add(position: Int, item: String) {
+    private fun onClick() {
+        TODO("Not yet implemented / On Click method: get to the detailed view")
+    }
+
+    fun add(position: Int, item: Doctor) {
         values.add(position, item)
         notifyItemInserted(position)
     }
@@ -45,6 +59,7 @@ class MyListAdapter(myDataSet: ArrayList<String>) : RecyclerView.Adapter<MyListA
         private var view: View = v
         var txtHeader: TextView = v.findViewById(R.id.firstLine)
         var txtFooter: TextView = v.findViewById(R.id.secondLine)
+        var img: ImageView = v.findViewById(R.id.icon)
 
     }
 }
