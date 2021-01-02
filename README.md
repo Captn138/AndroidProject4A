@@ -56,6 +56,7 @@ Pour tester l'application sur un téléphone Android, on peut [télécharger et 
 ## Fonctionnalités
 ### Premier écran
 Le premier écran est un splash screen, c'est un écran qui permet d'afficher une interface pour l'utilisateur pendant que l'application se charge.
+
 ![splash](https://i.imgur.com/cs0KtyX.png)
 ### Deuxième écran
 ![login](https://i.imgur.com/L8C9fPL.png)
@@ -63,5 +64,6 @@ Le premier écran est un splash screen, c'est un écran qui permet d'afficher un
 Le troisième écran est celui sur lequel on voit notre liste d'éléments.
 ![liste](https://i.imgur.com/5ISIPoJ.png)
 ### Quatrième écran
-Le quatrième écran est celui sur lequel on peut voir des détails sur l'objet. *Item name* est le nom de l'objet, *under the set* est le type d'objet dont est dérivé l'objet sélectionné et *Minecraft item name* est le nom de l'objet pour le système, composé de som parent et d'un champ supplémentaire appelé *meta*.
+Le quatrième écran est celui sur lequel on peut voir des détails sur l'acteur. On peut voir son *incarnation* et le *numéro* de l'acteur, ainsi que son portrait.
+
 ![details](https://i.imgur.com/p69WpaF.png)
