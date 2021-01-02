@@ -1,20 +1,23 @@
 package com.esiea.project.presentation.main
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
 import com.esiea.project.R
+import com.esiea.project.presentation.list.MyListActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    val mainViewModel : MainViewModel by inject()
+    private val mainViewModel : MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +25,15 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.loginLiveData.observe(this, Observer {
             when (it) {
-                is LoginSuccess -> TODO()
+                is LoginSuccess -> {
+                    val intent = Intent(this, MyListActivity::class.java)
+                    startActivity(intent)
+                }
                 LoginError -> {
                     MaterialAlertDialogBuilder(this)
                         .setTitle("Erreur")
                         .setMessage("Compte inconnu ou mot de passe incorrect")
-                        .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+                        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                         .show()
                 }
             }
@@ -39,14 +45,14 @@ class MainActivity : AppCompatActivity() {
                     MaterialAlertDialogBuilder(this)
                         .setTitle("Succès")
                         .setMessage("Votre compte a été créé. Vous pouvez désormais vous connecter.")
-                        .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+                        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                         .show()
                 }
                 RegisterError -> {
                     MaterialAlertDialogBuilder(this)
                         .setTitle("Erreur")
-                        .setMessage("Email ou mot de passe vide")
-                        .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+                        .setMessage("Email ou mot de passe vide, ou compte déjà existant.")
+                        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                         .show()
                 }
             }
@@ -66,26 +72,24 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        when (isNightTheme) {
+        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_YES ->
-                dark_theme_switch.setChecked(true)
+                dark_theme_switch.isChecked = true
             Configuration.UI_MODE_NIGHT_NO ->
-                dark_theme_switch.setChecked(false)
+                dark_theme_switch.isChecked = false
         }
 
         dark_theme_switch.setOnClickListener {
-            val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-            when (isNightTheme) {
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_YES -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    dark_theme_switch.setChecked(false)
+                    dark_theme_switch.isChecked = false
                 }
                 Configuration.UI_MODE_NIGHT_NO -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    dark_theme_switch.setChecked(true)
+                    dark_theme_switch.isChecked = true
                 }
             }
         }
-    }
+   }
 }

@@ -39,6 +39,9 @@ class MainViewModel(
                 createUserUseCase.invoke(user)
                 flag = true
             }
+            if(getUserUseCase.invoke(emailUser, password) != null) {
+                flag = true
+            }
             val registerStatus = if (flag == true) {
                 RegisterSuccess(user.email)
             } else {
