@@ -44,7 +44,6 @@ dependencies {
     def mockk_version = '1.10.2'
     def recyclerview_version = '1.1.0'
     def retrofit_version = '2.6.0'
-    def picasso_version = '2.71828'
 
     //KOIN
     implementation "org.koin:koin-core:$koin_version"
