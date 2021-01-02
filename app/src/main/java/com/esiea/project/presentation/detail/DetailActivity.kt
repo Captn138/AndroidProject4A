@@ -1,5 +1,6 @@
 package com.esiea.project.presentation.detail
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -17,8 +18,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        var jsonDoctor = intent.getStringExtra(Constants.key_doctor_list)
-        var doctor = Singletons.getGson().fromJson(jsonDoctor, Doctor::class.java)
+        val jsonDoctor = intent.getStringExtra(Constants.key_doctor_list)
+        val doctor = Singletons.getGson().fromJson(jsonDoctor, Doctor::class.java)
 
         showDetails(doctor)
 
