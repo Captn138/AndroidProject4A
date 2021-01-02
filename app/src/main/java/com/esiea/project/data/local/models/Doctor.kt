@@ -1,4 +1,4 @@
-package com.esiea.project.data.remote
+package com.esiea.project.data.local.models
 
 class Doctor {
     var id: Int = 0

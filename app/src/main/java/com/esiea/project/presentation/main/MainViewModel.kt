@@ -3,6 +3,7 @@ package com.esiea.project.presentation.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.esiea.project.data.local.models.*
 import com.esiea.project.domain.entity.User
 import com.esiea.project.domain.usecase.CreateUserUseCase
 import com.esiea.project.domain.usecase.GetUserUseCase

@@ -1,4 +1,4 @@
-package com.esiea.project.presentation.main
+package com.esiea.project.data.local.models
 
 sealed class RegisterStatus
 

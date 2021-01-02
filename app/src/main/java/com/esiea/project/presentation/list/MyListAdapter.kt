@@ -8,13 +8,13 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.esiea.project.R
-import com.esiea.project.data.remote.Doctor
+import com.esiea.project.data.local.models.Doctor
 
 class MyListAdapter(myDataSet: ArrayList<Doctor>) : RecyclerView.Adapter<MyListAdapter.MyViewHolder>() {
 
     private var values: ArrayList<Doctor> = myDataSet
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyListAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflatedView = parent.inflate(R.layout.row_layout, false)
         return MyViewHolder(inflatedView)
     }
@@ -28,7 +28,7 @@ class MyListAdapter(myDataSet: ArrayList<Doctor>) : RecyclerView.Adapter<MyListA
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val doctor: Doctor = values[position]
         holder.txtHeader.text = doctor.incarnation
-        holder.txtFooter.text = "ID: ${doctor.id}"
+        holder.txtFooter.text = "ID: " + doctor.id
         holder.txtHeader.setOnClickListener {
             onClick();
         }

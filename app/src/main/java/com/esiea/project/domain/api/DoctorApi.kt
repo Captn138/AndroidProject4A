@@ -1,6 +1,6 @@
 package com.esiea.project.domain.api
 
-import com.esiea.project.data.remote.Doctor
+import com.esiea.project.data.local.models.Doctor
 import retrofit2.Call
 import retrofit2.http.GET
 
