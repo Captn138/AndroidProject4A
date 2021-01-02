@@ -1,10 +1,12 @@
 package com.esiea.project.presentation.main
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.esiea.project.R
+import com.esiea.project.presentation.list.MyListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
@@ -42,4 +44,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
    }
+
+    fun navigateToList() {
+        val intent = Intent(this, MyListActivity::class.java)
+        startActivity(intent)
+    }
 }

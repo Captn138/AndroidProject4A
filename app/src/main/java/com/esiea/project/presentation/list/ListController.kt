@@ -11,11 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListController(view: MyListActivity, gson: Gson, sharedPreferences: SharedPreferences) {
-
-    private val view = view
-    private val gson = gson
-    private val sharedPreferences = sharedPreferences
+class ListController(private val view: MyListActivity, private val gson: Gson, private val sharedPreferences: SharedPreferences) {
 
     fun onStart() {
         val doctorList: List<Doctor>? = getDataFromCache()
@@ -27,7 +23,7 @@ class ListController(view: MyListActivity, gson: Gson, sharedPreferences: Shared
     }
 
     private fun getDataFromCache(): List<Doctor>? {
-        val jsonDoctor = sharedPreferences?.getString(Constants.key_doctor_list, null)
+        val jsonDoctor = sharedPreferences.getString(Constants.key_doctor_list, null)
         return if (jsonDoctor == null) {
             null
         } else {

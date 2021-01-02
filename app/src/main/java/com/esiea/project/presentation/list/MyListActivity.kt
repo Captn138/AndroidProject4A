@@ -1,5 +1,6 @@
 package com.esiea.project.presentation.list
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -12,7 +13,9 @@ import com.esiea.project.R
 import com.esiea.project.data.local.Constants
 import com.esiea.project.data.local.models.Doctor
 import com.esiea.project.injection.Singletons
+import com.esiea.project.presentation.detail.DetailActivity
 import com.esiea.project.presentation.list.MyListAdapter.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -35,20 +38,20 @@ class MyListActivity : AppCompatActivity() {
 
         when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_YES ->
-                dark_theme_switch.isChecked = true
+                dark_theme_switch1.isChecked = true
             Configuration.UI_MODE_NIGHT_NO ->
-                dark_theme_switch.isChecked = false
+                dark_theme_switch1.isChecked = false
         }
 
-        dark_theme_switch.setOnClickListener {
+        dark_theme_switch1.setOnClickListener {
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_YES -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    dark_theme_switch.isChecked = false
+                    dark_theme_switch1.isChecked = false
                 }
                 Configuration.UI_MODE_NIGHT_NO -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    dark_theme_switch.isChecked = true
+                    dark_theme_switch1.isChecked = true
                 }
             }
         }
@@ -72,6 +75,8 @@ class MyListActivity : AppCompatActivity() {
     }
 
     fun navigateToDetails(doctor: Doctor) {
-        TODO("navigation")
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(Constants.key_doctor_list, Singletons.getGson().toJson(doctor))
+        startActivity(intent)
     }
 }

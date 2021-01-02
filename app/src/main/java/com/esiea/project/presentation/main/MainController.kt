@@ -19,8 +19,7 @@ class MainController(view: MainActivity, mainViewModel: MainViewModel) {
         mainViewModel.loginLiveData.observe(view, Observer {
             when (it) {
                 is LoginSuccess -> {
-                    val intent = Intent(view, MyListActivity::class.java)
-                    view.startActivity(intent)
+                    view.navigateToList()
                 }
                 LoginError -> {
                     MaterialAlertDialogBuilder(view)

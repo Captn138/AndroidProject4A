@@ -28,6 +28,8 @@
             android:parentActivityName=".presentation.main.MainActivity"/>
         <activity
             android:name=".presentation.list.MyListActivity"/>
+        <activity
+            android:name=".presentation.detail.DetailActivity"/>
 
     </application>
 
