@@ -62,6 +62,7 @@ Le premier écran est un splash screen, c'est un écran qui permet d'afficher un
 ![login](https://i.imgur.com/L8C9fPL.png)
 ### Troisième écran
 Le troisième écran est celui sur lequel on voit notre liste d'éléments.
+
 ![liste](https://i.imgur.com/5ISIPoJ.png)
 ### Quatrième écran
 Le quatrième écran est celui sur lequel on peut voir des détails sur l'acteur. On peut voir son *incarnation* et le *numéro* de l'acteur, ainsi que son portrait.
